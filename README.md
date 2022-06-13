@@ -52,9 +52,13 @@ Running the application is very straight forward. You can use the following step
 - Install required dependencies from npm
 
       npm install
-- Run the application
+- Run the application on terminal
 
       npm start
+
+- Run on the browser
+
+      npm run serve
 
 # Authors
 This project was contributed to by:
