@@ -1,0 +1,21 @@
+{
+  "name": "l1-js-communicate-to-servers",
+  "version": "1.0.0",
+  "description": "Communicationg to servers",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node index.js",
+    "serve": "light-server -s . -p 7000"
+  },
+  "keywords": [
+    "json",
+    "promises",
+    "javascript"
+  ],
+  "author": "Ian Okumu",
+  "license": "ISC",
+  "dependencies": {
+    "light-server": "^2.9.1"
+  }
+}
