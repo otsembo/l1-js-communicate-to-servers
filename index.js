@@ -58,12 +58,15 @@ function loadSeafood(){
 
 
 // wait for DOM to load to do stuff
-document.addEventListener('DOMContentLoaded', (event)=>{
+document.addEventListener('DOMContentLoaded', (event) => {
     print(`Event loaded: ${event.type}`)
 
     // show random food
 
 
     // show list of sea food
+
+
+    // BONUS: Add a button, add an event listener to it to reload the random image
 
 })
