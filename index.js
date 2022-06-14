@@ -12,8 +12,8 @@ function createFoodItem(thumbnail, name){
     let mealImage = document.createElement('img')
     mealImage.src = thumbnail
     mealImage.alt = `${name} image`
-    mealImage.style.height = 200
-    mealImage.style.width = 200
+    mealImage.style.height = `200px`
+    mealImage.style.width = `200px`
 
     // meal name
     let mealTitle = document.createElement('h5')
@@ -38,7 +38,7 @@ function appendElement(element, id = "app-body"){
 
 // BASE URL FOR API
 const MEAL_API = "https://www.themealdb.com/api/json/v1/1/"
-const RADNOM_MEALS = `${MEAL_API}random.php`
+const RANDOM_MEALS = `${MEAL_API}random.php`
 const SEAFOOD = `${MEAL_API}filter.php?c=Seafood`
 
 
@@ -46,6 +46,25 @@ const SEAFOOD = `${MEAL_API}filter.php?c=Seafood`
 function loadRandomMeal(){
 
     //TODO: fill in the function
+    const mealPromise = fetch(RANDOM_MEALS)
+    mealPromise
+        .then((response) => response.json())
+        .then(
+
+            (jsonData) => {
+
+                const meals = jsonData.meals
+                const actualMeal = meals[0]
+
+                const thumbnail = actualMeal.strMealThumb
+                const name = actualMeal.strMeal
+
+                const foodItem = createFoodItem(thumbnail, name)
+                appendElement(foodItem, "random-meal")
+
+            }
+
+        )
 
 }
 
@@ -53,6 +72,32 @@ function loadRandomMeal(){
 function loadSeafood(){
 
     // TODO: fill in the function
+    const mealPromise = fetch(SEAFOOD)
+    mealPromise
+        .then((response) => response.json())
+        .then(
+
+            (jsonData) => {
+
+                const meals = jsonData.meals
+
+                meals.forEach(
+
+                    (actualMeal) => {
+
+                        
+                        const thumbnail = actualMeal.strMealThumb
+                        const name = actualMeal.strMeal
+        
+                        const foodItem = createFoodItem(thumbnail, name)
+                        appendElement(foodItem, "food-list")
+                    }
+
+                )
+
+            }
+
+        )
 
 }
 
@@ -62,10 +107,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     print(`Event loaded: ${event.type}`)
 
     // show random food
-
+    loadRandomMeal()
 
     // show list of sea food
-
+    loadSeafood()
 
     // BONUS: Add a button, add an event listener to it to reload the random image
 
