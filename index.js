@@ -12,8 +12,8 @@ function createFoodItem(thumbnail, name){
     let mealImage = document.createElement('img')
     mealImage.src = thumbnail
     mealImage.alt = `${name} image`
-    mealImage.style.height = 200
-    mealImage.style.width = 200
+    mealImage.style.height = '200px'
+    mealImage.style.width = '200px'
 
     // meal name
     let mealTitle = document.createElement('h5')
@@ -44,15 +44,36 @@ const SEAFOOD = `${MEAL_API}filter.php?c=Seafood`
 
 // function to load random meal
 function loadRandomMeal(){
-
     //TODO: fill in the function
+    const mealPromise =  fetch(RADNOM_MEALS)
 
+    mealPromise
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            const meal = data.meals[0]
+            const mealItem = createFoodItem(meal.strMealThumb, meal.strMeal)
+            appendElement(mealItem, "random-meal")
+        })
 }
 
 // function to load list of seafoods
 function loadSeafood(){
 
     // TODO: fill in the function
+    const seafoodPromise = fetch(SEAFOOD)
+    seafoodPromise
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            const meals = data.meals
+            meals.forEach((mealItem) => {
+                const food = createFoodItem(mealItem.strMealThumb, mealItem.strMeal)
+                appendElement(food, "food-list")
+            })
+        })
 
 }
 
@@ -62,10 +83,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     print(`Event loaded: ${event.type}`)
 
     // show random food
-
+    loadRandomMeal()
 
     // show list of sea food
-
+    loadSeafood()
 
     // BONUS: Add a button, add an event listener to it to reload the random image
 
